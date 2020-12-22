@@ -1,76 +1,70 @@
-const express = require("express");
 const mysql = require("mysql");
 
 // create the connection
-const dp = mysql.createConnection({
+const db = mysql.createConnection({
   host: "localhost",
   user: "hyfuser",
   password: "hyfpassword",
-  database: "meetup",
+  // database: "meetup",
 });
 
 // connect
-dp.connect((err) => {
+db.connect((err) => {
   if (err) {
     throw err;
   }
   console.log("mysql is connected");
 });
-const app = express();
 
-// create DP
-app.get("/createdp", (req, res) => {
+// create Db
+const createDb = function () {
   let sql = "CREATE DATABASE meetup";
-  dp.query(sql, (err, result) => {
+  db.query(sql, (err, result) => {
     if (err) {
       throw err;
     }
-    // console.log(result);
-    res.send(`DATABASE created... ${result}`);
+    console.log(`DATABASE created... ${result}`);
   });
-});
+};
 
 // create invitee table
-app.get("/inviteetable", (req, res) => {
+const createTable = function () {
   let sql =
     "CREATE TABLE Invitee(invitee_no int , invitee_name VARCHAR(10), invited_by VARCHAR(15) ) ";
-  dp.query(sql, (err, result) => {
+  db.query(sql, (err, result) => {
     if (err) {
       throw err;
     }
-    // console.log(result);
-    res.send(`Invite table created... ${result}`);
+    console.log(`Invite table created... ${result}`);
   });
-});
+};
 
 // create Room table
-app.get("/roomtable", (req, res) => {
+const createRoomTable = function () {
   let sql =
     "CREATE TABLE Room(room_no INT , room_name VARCHAR(10), floor_number INT ) ";
-  dp.query(sql, (err, result) => {
+  db.query(sql, (err, result) => {
     if (err) {
       throw err;
     }
-    // console.log(result);
-    res.send(`Room table created... ${result}`);
+    console.log(`Room table created... ${result}`);
   });
-});
+};
 
 // create Meeting table
-app.get("/meetingtable", (req, res) => {
+createMeetingTable = function () {
   let sql =
     "CREATE TABLE Meeting(meeting_no INT , meeting_title VARCHAR(10), starting_time DATETIME, ending_time  DATETIME , room_no INT ) ";
-  dp.query(sql, (err, result) => {
+  db.query(sql, (err, result) => {
     if (err) {
       throw err;
     }
-    // console.log(result);
-    res.send(`Meeting table created... ${result}`);
+    console.log(`Meeting table created... ${result}`);
   });
-});
+};
 
 // insert to the invitee table
-app.get("/invitations", (req, res) => {
+insertDataToTable = function () {
   let invite = [
     [1, "Ismaiel", "Alnabwani"],
     [2, "Omran", "Alnabwani"],
@@ -80,17 +74,16 @@ app.get("/invitations", (req, res) => {
   ];
   let sql =
     "INSERT INTO Invitee (invitee_no  , invitee_name , invited_by ) VALUES ?";
-  let query = dp.query(sql, [invite], (err, result) => {
+  let query = db.query(sql, [invite], (err, result) => {
     if (err) {
       throw err;
     }
-    // console.log(result);
-    res.send(`Invitations sent... ${result}`);
+    console.log(`Invitations sent... ${result}`);
   });
-});
+};
 
 // insert to the room table
-app.get("/rooms", (req, res) => {
+const insertValueToRoomTable = function () {
   let rooms = [
     [1, "confirnce", 10],
     [2, "Skyroom", 50],
@@ -99,17 +92,16 @@ app.get("/rooms", (req, res) => {
     [5, "suite", 40],
   ];
   let sql = "INSERT INTO Room (room_no , room_name , floor_number ) VALUES ?";
-  let query = dp.query(sql, [rooms], (err, result) => {
+  let query = db.query(sql, [rooms], (err, result) => {
     if (err) {
       throw err;
     }
-    // console.log(result);
-    res.send(`room records inserted... ${result}`);
+    console.log(`room records inserted... ${result}`);
   });
-});
+};
 
-// insert to the room table
-app.get("/meetings", (req, res) => {
+// insert to the meeting table
+const insertValueToMeetingTable = function () {
   let meeting = [
     [11, "tranning", "2020-04-06 10:10:23", "2020-04-06 11:10:23", 12],
     [14, " intro", "2020-07-07 14:10:00", "2020-07-07 16:10:00", 40],
@@ -119,15 +111,12 @@ app.get("/meetings", (req, res) => {
   ];
   let sql =
     "INSERT INTO Meeting (meeting_no , meeting_title , starting_time , ending_time , room_no ) VALUES ?";
-  let query = dp.query(sql, [meeting], (err, result) => {
+  let query = db.query(sql, [meeting], (err, result) => {
     if (err) {
       throw err;
     }
-    console.log(result);
-    res.send(`meeting records inserted... ${result} `);
+    console.log(`meeting records inserted... ${result} `);
   });
-});
+};
 
-app.listen("3000", () => {
-  console.log("Server started at port 3000");
-});
+db.end();
