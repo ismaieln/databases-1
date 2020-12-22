@@ -14,15 +14,22 @@ connection.query("SELECT 1 + 1 AS solution", (error, results, fields) => {
 });
 
 let Authors = [
-  "CREATE TABLE IF NOT EXISTS Authors (author_no INT AUTO_INCREMENT, author_name VARCHAR(200), university VARCHAR(200), date_of_birth DATE, h_index VARCHAR(200), gender ENUM('m','f'), PRIMARY KEY ('author_no')",
-  "ALTER TABLE Authors ADD collaborator INT, ADD CONSTRAINT FK_collaborator FOREIGN KEY (collaborator) REFERENCES Authors(author_no)",
+  `CREATE TABLE IF NOT EXISTS Authors (author_no INT PRIMARY KEY AUTO_INCREMENT, 
+      author_name VARCHAR(200), 
+      university VARCHAR(200), 
+      date_of_birth DATE, 
+      h_index INT, 
+      gender ENUM('m','f'))`,
+  `ALTER TABLE Authors (ADD collaborator INT, ADD CONSTRAINT FK_collaborator FOREIGN KEY (collaborator) REFERENCES Authors(author_no))`,
 ];
 
-connection.query(create_query, function (error, results, fields) {
-  if (error) {
-    throw error;
-  }
-  console.log("the reply is ", results);
+Authors.forEach((elem) => {
+  connection.query(elem, (error, results, fields) => {
+    if (error) {
+      throw error;
+    }
+    console.log("Table created ", results);
+  });
 });
 
 connection.end();
