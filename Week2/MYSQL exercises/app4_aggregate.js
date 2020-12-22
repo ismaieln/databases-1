@@ -27,8 +27,7 @@ let aggregateData = [
   WHERE gender = 'f';
   `,
   `SELECT university, AVG(h_index) AS Average_Index
-  FROM Authors
-  GROUP BY university;
+  FROM Authors GROUP BY university;
   `,
   `SELECT university, COUNT(S.author_no) AS Total_Papers
   FROM Authors U
