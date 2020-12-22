@@ -19,8 +19,8 @@ let Authors = [
       university VARCHAR(200), 
       date_of_birth DATE, 
       h_index INT, 
-      gender ENUM('m','f'))`,
-  `ALTER TABLE Authors (ADD collaborator INT, ADD CONSTRAINT FK_collaborator FOREIGN KEY (collaborator) REFERENCES Authors(author_no))`,
+      gender ENUM('m','f'));`,
+  `ALTER TABLE Authors (ADD collaborator INT, ADD CONSTRAINT FK_collaborator FOREIGN KEY (collaborator) REFERENCES Authors(author_no));`,
 ];
 
 Authors.forEach((elem) => {

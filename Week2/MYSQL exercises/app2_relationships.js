@@ -56,7 +56,7 @@ let authors_values = `INSERT INTO Authors VALUES
 ('Locy12','Dusiburg','1959-12-05',47,'f', NULL),
 ('Ismaiel13','Hyderabad','1985-01-25',85,'m', NULL),
 ('Ismaiel14','Osaka','1992-05-05',45,'m', NULL),
-('Locy15','Kyoto','1947-02-15',55,'f', NULL),
+('Locy15','Kyoto','1947-02-15',55,'f', NULL);
 `;
 
 //Values for research_Papers
@@ -80,15 +80,15 @@ let researchPapers = `INSERT INTO Research_Papers VALUES
 ('Title17', 'conference17', '2020-02-05', NULL),
 ('Title18', 'conference18', '2020-02-05', NULL),
 ('Title19', 'conference19', '2020-02-05', NULL),
-('Title20', 'conference20', '2020-02-05', NULL),
+('Title20', 'conference20', '2020-02-05', NULL);
 `;
 
 //Insert the values into Authers & Research_Papers
-isertValue(authors_values);
-isertValue(researchPapers);
+insertValue(authors_values);
+insertValue(researchPapers);
 
 //Function to insert values into tables
-function isertValue(values) {
+function insertValue(values) {
   values.forEach((elem) => {
     connection.query(elem, (error, results, fields) => {
       if (error) {

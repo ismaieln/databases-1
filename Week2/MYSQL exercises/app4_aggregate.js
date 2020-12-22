@@ -15,34 +15,28 @@ connection.query("SELECT 1 + 1 AS solution", (error, results, fields) => {
 });
 
 let aggregateData = [
-  `
-  SELECT paper_title, COUNT(author_no) AS Authors
+  `SELECT paper_title, COUNT(author_no) AS Authors
   FROM Research_Papers C
       LEFT JOIN Authors_Research_Papers P
           ON C.paper_id = P.paper_id
-  GROUP BY paper_title;
-  `,
-  `
-  SELECT COUNT(*) AS PapersByFemales 
+  GROUP BY paper_title;`,
+  `SELECT COUNT(*) AS PapersByFemales 
   FROM Authors_Research_Papers F
       JOIN Authors P
           ON F.author_no = P.author_no
   WHERE gender = 'f';
   `,
-  `
-  SELECT university, AVG(h_index) AS Average_Index
+  `SELECT university, AVG(h_index) AS Average_Index
   FROM Authors
   GROUP BY university;
   `,
-  `
-  SELECT university, COUNT(S.author_no) AS Total_Papers
+  `SELECT university, COUNT(S.author_no) AS Total_Papers
   FROM Authors U
       JOIN Authors_Research_Papers S
           ON U.author_no = S.author_no
   GROUP BY university;
   `,
-  `
-  SELECT university, MIN(h_index) AS Minimum, MAX(h_index) AS Maximum
+  `SELECT university, MIN(h_index) AS Minimum, MAX(h_index) AS Maximum
   FROM Authors
   GROUP BY university;
   `,
