@@ -8,11 +8,6 @@ const connection = mysql.createConnection({
 
 connection.connect();
 
-connection.query("SELECT 1 + 1 AS solution", (error, results, fields) => {
-  if (error) throw error;
-  console.log("The solution is: ", results[0].solution);
-});
-
 let printData = [
   `
   SELECT A.author_name, B.author_name AS Collaborators
@@ -27,10 +22,10 @@ let printData = [
 ];
 
 printData.forEach((elem) => {
-  connection.query(elem, function (error, results, fields) {
+  connection.query(elem, (error, results, fields) => {
     if (error) throw error;
   });
-  console.log(`Request No. ${indexOf(elem) + 1} has been done`);
+  console.log(`Request has been done`);
 });
 
 connection.end();

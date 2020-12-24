@@ -8,28 +8,21 @@ const connection = mysql.createConnection({
 
 connection.connect();
 
-connection.query("SELECT 1 + 1 AS solution", (error, results, fields) => {
-  if (error) throw error;
-  console.log("The solution is: ", results[0].solution);
-});
+let Authors =
+  "CREATE TABLE IF NOT EXISTS Authors (author_no INT PRIMARY KEY , author_name VARCHAR(200), university VARCHAR(200), date_of_birth DATE, h_index INT, gender ENUM('m','f'));";
+let sql1 =
+  "ALTER TABLE Authors ADD collaborator INT, ADD CONSTRAINT FK_collaborator FOREIGN KEY (collaborator) REFERENCES Authors(author_no);";
 
-let Authors = [
-  `CREATE TABLE IF NOT EXISTS Authors (author_no INT PRIMARY KEY AUTO_INCREMENT, 
-      author_name VARCHAR(200), 
-      university VARCHAR(200), 
-      date_of_birth DATE, 
-      h_index INT, 
-      gender ENUM('m','f'));`,
-  `ALTER TABLE Authors (ADD collaborator INT, ADD CONSTRAINT FK_collaborator FOREIGN KEY (collaborator) REFERENCES Authors(author_no));`,
-];
+createQuery(Authors);
+createQuery(sql1);
 
-Authors.forEach((elem) => {
-  connection.query(elem, (error, results, fields) => {
+function createQuery(sqlQuery) {
+  connection.query(sqlQuery, (error, results, fields) => {
     if (error) {
       throw error;
     }
-    console.log("Table created ", results);
   });
-});
+  console.log("Data added");
+}
 
 connection.end();
