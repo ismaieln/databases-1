@@ -14,6 +14,7 @@ let Authors =
 let sql1 =
   "ALTER TABLE Authors ADD collaborator INT, ADD CONSTRAINT FK_collaborator FOREIGN KEY (collaborator) REFERENCES Authors(author_no);";
 
+// Call the function to do the query
 createQuery(Authors);
 createQuery(sql1);
 
