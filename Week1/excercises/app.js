@@ -1,11 +1,11 @@
 const mysql = require("mysql");
 
-// create the connection
+// Make the connection
 const db = mysql.createConnection({
   host: "localhost",
-  user: "hyfuser",
-  password: "hyfpassword",
-  // database: "meetup",
+  user: "root",
+  password: "Omran2003",
+  database: "meetup",
 });
 
 // connect
@@ -16,52 +16,24 @@ db.connect((err) => {
   console.log("mysql is connected");
 });
 
-// create Db
-const createDb = function () {
-  let sql = "CREATE DATABASE meetup";
-  db.query(sql, (err, result) => {
-    if (err) {
-      throw err;
-    }
-    console.log(`DATABASE created... ${result}`);
-  });
-};
+// Create a database called meetup
+const createDb = "CREATE DATABASE IF NOT EXISTS meetup;";
+doQuery(createDb);
 
 // create invitee table
-const createTable = function () {
-  let sql =
-    "CREATE TABLE Invitee(invitee_no int , invitee_name VARCHAR(10), invited_by VARCHAR(15) ) ";
-  db.query(sql, (err, result) => {
-    if (err) {
-      throw err;
-    }
-    console.log(`Invite table created... ${result}`);
-  });
-};
+const invitee =
+  "CREATE TABLE IF NOT EXISTS Invitee(invitee_no int, invitee_name VARCHAR(200), invited_by VARCHAR(200));";
+doQuery(invitee);
 
 // create Room table
-const createRoomTable = function () {
-  let sql =
-    "CREATE TABLE Room(room_no INT , room_name VARCHAR(10), floor_number INT ) ";
-  db.query(sql, (err, result) => {
-    if (err) {
-      throw err;
-    }
-    console.log(`Room table created... ${result}`);
-  });
-};
+const room =
+  "CREATE TABLE IF NOT EXISTS Room(room_no INT , room_name VARCHAR(200), floor_number INT );";
+doQuery(room);
 
 // create Meeting table
-createMeetingTable = function () {
-  let sql =
-    "CREATE TABLE Meeting(meeting_no INT , meeting_title VARCHAR(10), starting_time DATETIME, ending_time  DATETIME , room_no INT ) ";
-  db.query(sql, (err, result) => {
-    if (err) {
-      throw err;
-    }
-    console.log(`Meeting table created... ${result}`);
-  });
-};
+meeting =
+  "CREATE TABLE IF NOT EXISTS Meeting(meeting_no INT , meeting_title VARCHAR(200), starting_time DATETIME, ending_time  DATETIME, room_no INT ) ";
+doQuery(meeting);
 
 // insert to the invitee table
 insertDataToTable = function () {
@@ -118,5 +90,14 @@ const insertValueToMeetingTable = function () {
     console.log(`meeting records inserted... ${result} `);
   });
 };
+
+function doQuery(queryD) {
+  db.query(queryD, (err, result) => {
+    if (err) {
+      throw err;
+    }
+    console.log("Done");
+  });
+}
 
 db.end();
