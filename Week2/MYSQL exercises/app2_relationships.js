@@ -25,8 +25,8 @@ let Research_Papers = `CREATE TABLE IF NOT EXISTS Research_Papers(paper_id INT P
     author_id int,
     CONSTRAINT FK_AUTHORS FOREIGN KEY (author_id) REFERENCES authors(author_no));`;
 
-connection.query(Research_Papers, (error, results, fields) => {
-  if (error) throw error;
+connection.query(Research_Papers, (err, results, fields) => {
+  if (err) throw err;
   console.log("Table created", results);
 });
 
@@ -34,33 +34,33 @@ connection.query(Research_Papers, (error, results, fields) => {
 let authors_values = [
   "INSERT INTO authors VALUES(1, 'Ismaiel01','Damascus','1969-12-05',25,'m', NULL);",
   ,
-  "INSERT INTO authors VALUES(2,'Ismaiel02','Haarlem','1973-03-05',12,'m', NULL);",
+  "INSERT INTO authors VALUES(2,'Ismaiel02','Haarlem','1973-03-05',12,'m', 15);",
   ,
-  "INSERT INTO authors VALUES(3,'Ismaiel03','Amsterdam','1978-04-05',13,'m', NULL);",
+  "INSERT INTO authors VALUES(3,'Ismaiel03','Amsterdam','1978-04-05',13,'m', 13);",
   ,
-  "INSERT INTO authors VALUES(4,'Ismaiel04','Leiden','1962-07-05',22,'m', NULL);",
+  "INSERT INTO authors VALUES(4,'Ismaiel04','Leiden','1962-07-05',22,'m', 12);",
   ,
-  "INSERT INTO authors VALUES(5,'Locy05','Damascus','1965-11-05',34,'f', NULL);",
+  "INSERT INTO authors VALUES(5,'Locy05','Damascus','1965-11-05',34,'f', 15);",
   ,
-  "INSERT INTO authors VALUES(6,'Ismaiel06','Dusiburg','1981-10-05',47,'m', NULL);",
+  "INSERT INTO authors VALUES(6,'Ismaiel06','Dusiburg','1981-10-05',47,'m', 1);",
   ,
-  "INSERT INTO authors VALUES(7,'Ismaiel07','Bielefeid','1971-09-05',15,'m', NULL);",
+  "INSERT INTO authors VALUES(7,'Ismaiel07','Bielefeid','1971-09-05',15,'m', 1);",
   ,
-  "INSERT INTO authors VALUES(8,'Ismaiel08','Saxion','1979-12-05',22,'m', NULL);",
+  "INSERT INTO authors VALUES(8,'Ismaiel08','Saxion','1979-12-05',22,'m', 2);",
   ,
-  "INSERT INTO authors VALUES(9,'Locy09','Birmingham','1996-12-05',05,'f', NULL);",
+  "INSERT INTO authors VALUES(9,'Locy09','Birmingham','1996-12-05',05,'f', 3);",
   ,
-  "INSERT INTO authors VALUES(10,'Ismaiel10','Oxford','1986-12-05',14,'m', NULL);",
+  "INSERT INTO authors VALUES(10,'Ismaiel10','Oxford','1986-12-05',14,'m', 7);",
   ,
-  "INSERT INTO authors VALUES(11,'Ismaiel11','Cairo','1975-12-05',18,'m', NULL);",
+  "INSERT INTO authors VALUES(11,'Ismaiel11','Cairo','1975-12-05',18,'m', 8);",
   ,
-  "INSERT INTO authors VALUES(12,'Locy12','Dusiburg','1959-12-05',47,'f', NULL);",
+  "INSERT INTO authors VALUES(12,'Locy12','Dusiburg','1959-12-05',47,'f', 9);",
   ,
-  "INSERT INTO authors VALUES(13,'Ismaiel13','Hyderabad','1985-01-25',85,'m', NULL);",
+  "INSERT INTO authors VALUES(13,'Ismaiel13','Hyderabad','1985-01-25',85,'m', 7);",
   ,
-  "INSERT INTO authors VALUES(14,'Ismaiel14','Osaka','1992-05-05',45,'m', NULL);",
+  "INSERT INTO authors VALUES(14,'Ismaiel14','Osaka','1992-05-05',45,'m', 13);",
   ,
-  "INSERT INTO authors VALUES(15,'Locy15','Kyoto','1947-02-15',55,'f', NULL);",
+  "INSERT INTO authors VALUES(15,'Locy15','Kyoto','1947-02-15',55,'f', 3);",
 ];
 
 //Values for research_Papers
@@ -93,9 +93,9 @@ insertValue(papers);
 
 //Function to create table
 function createQuery(sqlQuery) {
-  connection.query(sqlQuery, (error, results, fields) => {
-    if (error) {
-      throw error;
+  connection.query(sqlQuery, (err, results, fields) => {
+    if (err) {
+      throw err;
     }
     console.log("Data added");
   });
@@ -104,9 +104,9 @@ function createQuery(sqlQuery) {
 //Function to insert values into tables
 function insertValue(values) {
   values.forEach((element) => {
-    connection.query(element, (error, results, fields) => {
-      if (error) {
-        throw error;
+    connection.query(element, (err, results, fields) => {
+      if (err) {
+        throw err;
       }
     });
   });

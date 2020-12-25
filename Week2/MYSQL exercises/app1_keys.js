@@ -17,9 +17,9 @@ createQuery(Authors);
 createQuery(sql1);
 
 function createQuery(sqlQuery) {
-  connection.query(sqlQuery, (error, results, fields) => {
-    if (error) {
-      throw error;
+  connection.query(sqlQuery, (err, results, fields) => {
+    if (err) {
+      throw err;
     }
   });
   console.log("Data added");

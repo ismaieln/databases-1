@@ -8,24 +8,24 @@ const connection = mysql.createConnection({
 
 connection.connect();
 
-let printData = [
-  `
-  SELECT A.author_name, B.author_name AS Collaborators
-  FROM Authors A
-      JOIN Authors B
-      ON A.collaborator = B.author_no;`,
-  `SELECT author_name, paper_title FROM Authors S 
-      LEFT JOIN Authors_Research_Papers R
-      ON S.author_no = R.author_no
-      LEFT JOIN Research_Papers H
-      ON H.paper_id = R.paper_id;`,
-];
+let correspondace = `SELECT a.author_name, b.author_name AS Collaborators
+  FROM authors a
+  LEFT JOIN authors b
+  ON a.author_no = b.collaborator;`;
 
-printData.forEach((elem) => {
-  connection.query(elem, (error, results, fields) => {
-    if (error) throw error;
+let pubished = `SELECT author_name, paper_title as paper
+FROM authors
+LEFT JOIN research_papers
+ON authors.author_no = research_papers.author_id;`;
+
+printData(correspondace);
+printData(pubished);
+
+function printData(dataP) {
+  connection.query(dataP, (err, results, fields) => {
+    if (err) throw err;
+    console.log(results);
   });
-  console.log(`Request has been done`);
-});
+}
 
 connection.end();
