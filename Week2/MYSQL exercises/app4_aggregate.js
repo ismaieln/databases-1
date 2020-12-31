@@ -16,9 +16,10 @@ let query1 = `SELECT paper_title, Count(author_no) AS Authors
               GROUP BY paper_title;`;
 
 //Sum of the research papers published by all female authors.
-let query2 = `SELECT COUNT(*) AS 'Female Authors'
-              FROM Authors      
-              WHERE gender = 'f';`;
+let query2 = `SELECT COUNT(*) AS 'paper by Female Authors'
+              FROM research_papers 
+              join Authors
+              WHERE gender = 'f' AND author_id = author_no;`;
 
 //Average of the h-index of all authors per university.
 let query3 = `SELECT university, AVG(h_index) AS Average_Index

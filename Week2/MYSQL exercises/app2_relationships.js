@@ -35,7 +35,7 @@ connection.query(Research_Papers, (err, results, fields) => {
 let authors_values = [
   "INSERT INTO authors VALUES(1, 'Ismaiel01','Damascus','1969-12-05',25,'m', NULL);",
   ,
-  "INSERT INTO authors VALUES(2,'Ismaiel02','Haarlem','1973-03-05',12,'m', 15);",
+  "INSERT INTO authors VALUES(2,'Ismaiel02','Haarlem','1973-03-05',12,'f', 15);",
   ,
   "INSERT INTO authors VALUES(3,'Ismaiel03','Amsterdam','1978-04-05',13,'m', 13);",
   ,
@@ -83,8 +83,8 @@ let papers = [
   "INSERT INTO Research_Papers VALUES(114,'Title15', 'conference15', '2020-02-05', 13)",
   "INSERT INTO Research_Papers VALUES(115,'Title16', 'conference16', '2020-02-05', 14)",
   "INSERT INTO Research_Papers VALUES(116,'Title17', 'conference17', '2020-02-05', 15)",
-  "INSERT INTO Research_Papers VALUES(117,'Title18', 'conference18', '2020-02-05', 1)",
-  "INSERT INTO Research_Papers VALUES(118,'Title19', 'conference19', '2020-02-05', 1)",
+  "INSERT INTO Research_Papers VALUES(117,'Title18', 'conference18', '2020-02-05', 15)",
+  "INSERT INTO Research_Papers VALUES(118,'Title19', 'conference19', '2020-02-05', 15)",
   "INSERT INTO Research_Papers VALUES(119,'Title20', 'conference20', '2020-02-05', 2);",
 ];
 

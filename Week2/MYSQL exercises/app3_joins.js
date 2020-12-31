@@ -12,10 +12,10 @@ connection.connect();
 let correspondace = `SELECT a.author_name, b.author_name AS Collaborators
                      FROM authors a
                      LEFT JOIN authors b
-                     ON a.author_no = b.collaborator;`;
+                     ON a.collaborator = b.author_no;`;
 
 //prints all columns of Authors and their pubished paper_title
-let pubished = `SELECT author_name, paper_title as paper
+let pubished = `SELECT *, paper_title as paper
                 FROM authors
                 LEFT JOIN research_papers
                 ON authors.author_no = research_papers.author_id;`;
