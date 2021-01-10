@@ -11,7 +11,12 @@
 // |         8 | Hema          | 9 Peter St     | D00001003 | 2020-03-20  | B03        | Goat Farm         | P1, T1, M1| Pie, Tea, Mousse |
 // +-----------+---------------+----------------+-----------+-------------+------------+-------------------+-----------+------------------+
 
-// 1)- to convert this table to 1NF:
-//     We have to drop the food_code column and the food_description column, due to multi information in one column.
+// 1)- The columns violated the 1NF are:
+//     food_code and the food_description column, due to multi information in one column.
 
-// 2)-
+// 2)-food_description: can be extended to three columns => main_dish, drink and dessert.
+
+// 3)- table_1 "members",(member_id, member_name, member_address).
+//     table_2 "dinner" ,(dinner_id, dinner_date, member_id).
+//     table_3 "venue" ,(venue_code, venue_description, dinner_id).
+//     table_4 "food" ,(food_code, food_description, venue_code)

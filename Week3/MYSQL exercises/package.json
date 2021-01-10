@@ -9,6 +9,7 @@
   "author": "Ismaiel",
   "license": "ISC",
   "dependencies": {
+    "mongodb": "^3.6.3",
     "mysql": "^2.18.1"
   }
 }
